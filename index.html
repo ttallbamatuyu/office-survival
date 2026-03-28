@@ -38,32 +38,54 @@
 
     </div>
 
+    <!-- 🌟 PC 유저를 위한 QR 코드 팝업창 (기본적으로 숨겨져 있음) -->
+    <div id="qr-modal" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center hidden z-50 fade-in px-4">
+        <div class="bg-white p-6 rounded-2xl shadow-xl max-w-xs w-full text-center relative">
+            <!-- 닫기 버튼 -->
+            <button onclick="closeQrModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-700 transition">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            
+            <h3 class="text-lg font-extrabold text-gray-800 mb-2 mt-2">카메라로 스캔해주세요!</h3>
+            <p class="text-xs text-gray-500 mb-5 leading-relaxed">PC에서는 카카오페이 앱을 바로 열 수 없어<br>QR 코드로 안내해 드립니다 ☕️</p>
+            
+            <div class="bg-gray-50 p-3 rounded-xl mb-4 inline-block border border-gray-100">
+                <!-- ========================================================================= -->
+                <!-- ⚠️ [수정 포인트 1] 여기에 본인의 진짜 카카오페이 QR 코드 이미지 주소를 넣으세요 -->
+                <!-- 깃허브에 my_qr.png 파일을 올렸다면 아래 src="my_qr.png" 로 변경하시면 됩니다. -->
+                <!-- ========================================================================= -->
+                <img src="my_qr.png" alt="카카오페이 QR" class="w-40 h-40 object-contain mx-auto opacity-90">
+            </div>
+            
+            <button onclick="closeQrModal()" class="w-full bg-gray-800 hover:bg-gray-900 text-white font-bold py-3 rounded-xl transition duration-200 text-sm">
+                닫기
+            </button>
+        </div>
+    </div>
+
     <script>
         // ==========================================
         // 1. 데이터 정의 (질문과 결과)
         // ==========================================
         
-        // 12개의 질문 리스트 (각 질문에 어울리는 고유 이미지 주소)
         const questions = [
             { q: "출근 첫날, 점심시간! 나의 행동은?", img: "https://img.icons8.com/color/256/bento.png", a: "팀원들에게 다가가 밥을 같이 먹자고 한다.", b: "누군가 부를 때까지 자리를 지키며 눈치를 본다.", typeA: "E", typeB: "I" },
             { q: "주말에 회사 워크샵을 간다고 한다. 내 심정은?", img: "https://img.icons8.com/color/256/bus.png", a: "오! 다른 팀 사람들과도 친해질 기회다!", b: "아... 주말은 집에서 쉬어야 하는데 기가 빨린다.", typeA: "E", typeB: "I" },
             { q: "업무 중 스트레스가 쌓였을 때 나는?", img: "https://img.icons8.com/color/256/cafe.png", a: "동료들과 티타임을 가지며 수다로 푼다.", b: "혼자 조용한 곳에서 음악을 들으며 쉰다.", typeA: "E", typeB: "I" },
-            
             { q: "새로운 프로젝트를 맡게 되었다. 먼저 할 일은?", img: "https://img.icons8.com/color/256/idea.png", a: "기존 레퍼런스와 과거 데이터를 찾아본다.", b: "남들이 안 해본 새롭고 기발한 아이디어를 구상한다.", typeA: "S", typeB: "N" },
             { q: "회의 중 상사가 뜬구름 잡는 소리를 한다면?", img: "https://img.icons8.com/color/256/confused.png", a: "'그래서 구체적으로 뭘 하라는 거지?' 생각한다.", b: "'오, 저렇게도 생각할 수 있구나' 상상의 나래를 편다.", typeA: "S", typeB: "N" },
             { q: "업무 메뉴얼을 읽을 때 나는?", img: "https://img.icons8.com/color/256/book.png", a: "순서대로 꼼꼼히 읽으며 그대로 따라 한다.", b: "대충 훑어보고 감으로 일단 부딪혀 본다.", typeA: "S", typeB: "N" },
-            
             { q: "동기가 업무 실수로 상사에게 크게 혼나고 우울해한다.", img: "https://img.icons8.com/color/256/crying.png", a: "\"어떤 부분에서 실수한 거야? 다음엔 이렇게 해봐.\"", b: "\"진짜 속상하겠다. 오늘 끝나고 술 한잔 할래?\"", typeA: "T", typeB: "F" },
             { q: "나의 성과에 대해 피드백을 받을 때, 더 듣기 좋은 말은?", img: "https://img.icons8.com/color/256/good-quality.png", a: "\"일 처리 능력이 아주 뛰어나고 효율적이네요.\"", b: "\"팀을 위해 헌신하고 노력해 줘서 정말 고마워요.\"", typeA: "T", typeB: "F" },
             { q: "팀원이 기한을 못 지켜 내 업무까지 밀렸다.", img: "https://img.icons8.com/color/256/calendar.png", a: "일정 지연 사유를 묻고, 언제까지 가능한지 재확인한다.", b: "무슨 일 있나 걱정하며, 내가 도울 수 있는 부분을 찾는다.", typeA: "T", typeB: "F" },
-            
             { q: "상사가 엄청난 분량의 업무를 던져주었다.", img: "https://img.icons8.com/color/256/overtime.png", a: "일단 엑셀을 켜서 리스트업하고 우선순위를 짠다.", b: "아... 야근 확정이네. 일단 손에 잡히는 것부터 한다.", typeA: "J", typeB: "P" },
             { q: "내일은 중요한 발표 날이다. 퇴근 전 나의 모습은?", img: "https://img.icons8.com/color/256/presentation.png", a: "발표 대본과 예상 질문까지 완벽하게 정리해 둔다.", b: "대충 틀은 잡았으니 내일 아침의 나에게 맡긴다.", typeA: "J", typeB: "P" },
             { q: "오후에 갑자기 예정에 없던 회의가 잡혔다.", img: "https://img.icons8.com/color/256/meeting.png", a: "오늘 계획해 둔 내 업무 루틴이 깨져서 스트레스를 받는다.", b: "뭐 회의 끝나고 남는 시간에 하면 되지, 하고 넘긴다.", typeA: "J", typeB: "P" }
         ];
 
-        // 16가지 MBTI 결과 맞춤 이미지 및 쿠팡 파트너스 세팅
-        // ⚠️ link 부분의 'https://coupang.com'을 대표님의 실제 쿠팡 파트너스 상품 링크로 꼭 변경하세요!
+        // =========================================================================
+        // ⚠️ [수정 포인트 2] link 부분의 주소를 실제 발급받으신 쿠팡 파트너스 단축 링크로 변경하세요!
+        // =========================================================================
         const results = {
             "ESTJ": { title: "호통치는 불도저 (ESTJ)", desc: "체계적이고 규칙을 중시하는 워커홀릭 리더입니다. 꼰대 소리를 들을 수도 있지만 일 하나는 확실하죠!", color: "text-red-500", img: "https://img.icons8.com/color/256/megaphone.png", item: "강력한 피로회복! 고함량 비타민B", link: "https://link.coupang.com/a/ecZ5pm" },
             "ENTJ": { title: "전략적 야망가 (ENTJ)", desc: "목표 달성을 위해 거침없이 직진하는 리더! 비효율을 극혐하며 승진에 가장 유리한 타입입니다.", color: "text-red-600", img: "https://img.icons8.com/color/256/crown.png", item: "시간 관리의 끝판왕, 최고급 플래너", link: "https://link.coupang.com/a/ecZ6Oq" },
@@ -84,7 +106,7 @@
         };
 
         // ==========================================
-        // 2. 상태 관리 (현재 진행 상황)
+        // 2. 상태 관리
         // ==========================================
         let currentQuestionIndex = 0;
         let mbtiScores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
@@ -93,8 +115,6 @@
         // ==========================================
         // 3. 화면 렌더링 함수
         // ==========================================
-
-        // [화면 1] 시작 화면
         function renderStartScreen() {
             contentArea.innerHTML = `
                 <div class="flex-1 flex flex-col justify-center items-center text-center fade-in">
@@ -109,14 +129,12 @@
             `;
         }
 
-        // [화면 2] 질문 화면
         function renderQuestionScreen() {
             const q = questions[currentQuestionIndex];
             const progress = ((currentQuestionIndex) / questions.length) * 100;
 
             contentArea.innerHTML = `
                 <div class="flex-1 flex flex-col fade-in">
-                    <!-- 진행률 바 -->
                     <div class="w-full bg-gray-200 rounded-full h-2.5 mb-6">
                         <div class="bg-indigo-600 h-2.5 rounded-full transition-all duration-300" style="width: ${progress}%"></div>
                     </div>
@@ -124,7 +142,6 @@
                     <div class="text-indigo-600 font-bold mb-2">Q${currentQuestionIndex + 1}.</div>
                     <h2 class="text-xl font-bold text-gray-800 mb-4 leading-relaxed">${q.q}</h2>
                     
-                    <!-- 질문 관련 썸네일 이미지 영역 -->
                     <div class="flex-1 flex items-center justify-center mb-6">
                         <div class="w-32 h-32 bg-gray-50 rounded-full flex items-center justify-center overflow-hidden">
                             <img src="${q.img}" alt="질문 이미지" class="w-24 h-24 object-contain opacity-80" onerror="this.style.display='none'">
@@ -143,7 +160,6 @@
             `;
         }
 
-        // [화면 3] 결과 로딩 화면 (기대감 증폭)
         function renderLoadingScreen() {
             contentArea.innerHTML = `
                 <div class="flex-1 flex flex-col justify-center items-center text-center fade-in">
@@ -152,13 +168,10 @@
                     <p class="text-gray-500">잠시만 기다려주세요!</p>
                 </div>
             `;
-            // 2.5초 후 결과 화면으로 자동 이동
             setTimeout(renderResultScreen, 2500);
         }
 
-        // [화면 4] 최종 결과 화면 (수익화 핵심 페이지)
         function renderResultScreen() {
-            // MBTI 결과 계산 로직
             let finalMBTI = "";
             finalMBTI += mbtiScores.E >= mbtiScores.I ? "E" : "I";
             finalMBTI += mbtiScores.S >= mbtiScores.N ? "S" : "N";
@@ -183,9 +196,7 @@
                     <!-- 💰 1. 쿠팡 파트너스 추천 상품 영역 -->
                     <div class="w-full bg-blue-50 border border-blue-200 rounded-xl p-4 mb-3 cursor-pointer hover:bg-blue-100 transition transform hover:-translate-y-1 shadow-sm" onclick="window.open('${result.link}', '_blank')">
                         <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center text-2xl shadow-sm">
-                                🎁
-                            </div>
+                            <div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center text-2xl shadow-sm">🎁</div>
                             <div class="text-left flex-1">
                                 <p class="text-[11px] text-blue-600 font-bold mb-1">이 유형에게 찰떡인 생존템 추천!</p>
                                 <p class="text-sm text-gray-800 font-medium break-keep">${result.item}</p>
@@ -197,11 +208,10 @@
                         <p class="text-[9px] text-gray-400 mt-2 text-right">※ 파트너스 활동을 통해 일정액의 수수료를 제공받을 수 있습니다.</p>
                     </div>
 
-                    <!-- 💰 2. 개발자 후원 (카카오페이 송금 링크 등 활용) -->
-<!-- ⚠️ href 안의 주소를 본인의 카카오페이 송금 링크로 정확히 변경하세요! -->
-<a href="https://qr.kakaopay.com/FGWZY30d3" target="_blank" rel="noopener noreferrer" class="w-full bg-white hover:bg-[#FEE500] border border-gray-200 hover:border-[#FEE500] text-gray-600 hover:text-gray-900 font-bold py-2.5 rounded-xl transition duration-200 mb-6 flex items-center justify-center gap-2 text-sm shadow-sm decoration-transparent">
-    ☕ 재밌게 즐기셨다면? 카카오페이로 커피 한 잔 후원하기
-</a>
+                    <!-- 💰 2. 개발자 후원 (기기 감지형 버튼으로 수정됨) -->
+                    <button onclick="handleDonationClick()" class="w-full bg-white hover:bg-[#FEE500] border border-gray-200 hover:border-[#FEE500] text-gray-600 hover:text-gray-900 font-bold py-2.5 rounded-xl transition duration-200 mb-6 flex items-center justify-center gap-2 text-sm shadow-sm decoration-transparent">
+                        ☕ 재밌게 즐기셨다면? 카카오페이로 커피 한 잔 후원하기
+                    </button>
 
                     <!-- 하단 액션 버튼 -->
                     <div class="w-full flex gap-3 mt-auto">
@@ -217,7 +227,7 @@
         }
 
         // ==========================================
-        // 4. 액션 이벤트 함수
+        // 4. 액션 이벤트 & 디바이스 감지 함수
         // ==========================================
         function startTest() {
             currentQuestionIndex = 0;
@@ -228,7 +238,6 @@
         function answerQuestion(type) {
             mbtiScores[type]++;
             currentQuestionIndex++;
-            
             if (currentQuestionIndex < questions.length) {
                 renderQuestionScreen();
             } else {
@@ -241,18 +250,38 @@
         }
 
         function shareTest() {
-            // 실제 배포된 후 본인의 사이트 주소로 변경하세요!
             const myUrl = window.location.href; 
-            
             navigator.clipboard.writeText(myUrl).then(() => {
                 alert("테스트 링크가 복사되었습니다! 친구들에게 공유해보세요.");
             }).catch(() => {
-                // 모바일 브라우저 호환성을 위한 fallback
                 prompt("아래 링크를 복사해서 친구들에게 공유하세요!", myUrl);
             });
         }
 
-        // 프로그램 시작 시 첫 화면 렌더링
+        // 🌟 기기 감지 및 후원 버튼 처리 함수
+        function handleDonationClick() {
+            // 접속 기기가 모바일(스마트폰/태블릿)인지 확인하는 코드
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+            
+            // =========================================================================
+            // ⚠️ [수정 포인트 3] 본인의 실제 카카오페이 송금 링크로 완전히 변경하세요!
+            // =========================================================================
+            const myKakaoPayLink = "https://qr.kakaopay.com/FGWZY30d3";
+
+            if (isMobile) {
+                // 스마트폰이면 앱으로 바로 넘어가도록 현재 창 이동 (팝업 차단 우회)
+                window.location.href = myKakaoPayLink;
+            } else {
+                // PC 화면이면 닫혀있던 QR코드 모달(팝업창)을 화면에 띄우기
+                document.getElementById('qr-modal').classList.remove('hidden');
+            }
+        }
+
+        // 팝업창 닫기 함수
+        function closeQrModal() {
+            document.getElementById('qr-modal').classList.add('hidden');
+        }
+
         renderStartScreen();
     </script>
 </body>
