@@ -65,22 +65,22 @@
         // 16가지 MBTI 결과 맞춤 이미지 및 쿠팡 파트너스 세팅
         // ⚠️ link 부분의 'https://coupang.com'을 대표님의 실제 쿠팡 파트너스 상품 링크로 꼭 변경하세요!
         const results = {
-            "ESTJ": { title: "호통치는 불도저 (ESTJ)", desc: "체계적이고 규칙을 중시하는 워커홀릭 리더입니다. 꼰대 소리를 들을 수도 있지만 일 하나는 확실하죠!", color: "text-red-500", img: "https://img.icons8.com/color/256/megaphone.png", item: "강력한 피로회복! 고함량 비타민B", link: "https://coupang.com" },
-            "ENTJ": { title: "전략적 야망가 (ENTJ)", desc: "목표 달성을 위해 거침없이 직진하는 리더! 비효율을 극혐하며 승진에 가장 유리한 타입입니다.", color: "text-red-600", img: "https://img.icons8.com/color/256/crown.png", item: "시간 관리의 끝판왕, 최고급 플래너", link: "https://coupang.com" },
-            "ESFJ": { title: "다정다감 인싸 (ESFJ)", desc: "사내 평판 1위! 동료들을 챙기고 조직 분위기를 띄우는 없어서는 안 될 분위기 메이커입니다.", color: "text-yellow-500", img: "https://img.icons8.com/color/256/conference-call.png", item: "탕비실 인기 스타, 고급 다과 세트", link: "https://coupang.com" },
-            "ENFJ": { title: "따뜻한 멘토 (ENFJ)", desc: "타인의 성장을 돕는 것을 좋아하는 이상주의자! 동료들에게 긍정적인 에너지를 뿜어냅니다.", color: "text-yellow-400", img: "https://img.icons8.com/color/256/sun.png", item: "목관리를 위한 휴대용 가습기", link: "https://coupang.com" },
-            "ESTP": { title: "위기 대처 만렙 (ESTP)", desc: "순발력이 뛰어나고 실전에 강한 타짜! 갑작스러운 이슈 상황에서 가장 빛을 발합니다.", color: "text-orange-500", img: "https://img.icons8.com/color/256/flash-on.png", item: "언제든 달릴 준비! 편안한 사무실 슬리퍼", link: "https://coupang.com" },
-            "ENTP": { title: "아이디어 뱅크 (ENTP)", desc: "회의 시간의 폭주기관차! 기발한 아이디어는 넘치지만 마무리가 조금 약할 수 있어요.", color: "text-purple-500", img: "https://img.icons8.com/color/256/idea.png", item: "아이디어 번뜩! 무소음 기계식 키보드", link: "https://coupang.com" },
-            "ESFP": { title: "자유로운 영혼 (ESFP)", desc: "사무실에 갇혀 있는 걸 가장 힘들어하는 타입! 하지만 텐션이 높아 모두가 좋아합니다.", color: "text-pink-500", img: "https://img.icons8.com/color/256/confetti.png", item: "데스크테리어 완성! 귀여운 피규어 방향제", link: "https://coupang.com" },
-            "ENFP": { title: "열정 만수르 (ENFP)", desc: "새로운 프로젝트를 사랑하는 스파크형! 관심 있는 일에는 엄청난 열정을 보입니다.", color: "text-green-400", img: "https://img.icons8.com/color/256/rocket.png", item: "지루함 타파! 신기한 책상 장난감", link: "https://coupang.com" },
-            "ISTJ": { title: "소리 없는 에이스 (ISTJ)", desc: "FM 그 자체! 묵묵하고 정확하게 자신의 일을 완벽히 해내는 회사에서 가장 신뢰받는 타입입니다.", color: "text-blue-600", img: "https://img.icons8.com/color/256/todo-list.png", item: "정리의 달인, 데스크 오거나이저", link: "https://coupang.com" },
-            "INTJ": { title: "차가운 전략가 (INTJ)", desc: "남들과 다른 큰 그림을 그리는 고독한 천재! 혼자 일할 때 가장 효율이 높습니다.", color: "text-indigo-600", img: "https://img.icons8.com/color/256/brain.png", item: "완벽한 차단, 노이즈 캔슬링 헤드폰", link: "https://coupang.com" },
-            "ISFJ": { title: "헌신적인 천사 (ISFJ)", desc: "뒤에서 묵묵히 팀원들을 서포트하는 숨은 공로자! 거절을 잘 못해서 일이 몰릴 수 있어요.", color: "text-blue-400", img: "https://img.icons8.com/color/256/angel.png", item: "어깨 피로 싹! 미니 마사지기", link: "https://coupang.com" },
-            "INFJ": { title: "통찰력 있는 관찰자 (INFJ)", desc: "조용히 사람들을 파악하고 핵심을 꿰뚫어 봅니다. 완벽주의 성향이 있어 속으로 스트레스를 받아요.", color: "text-teal-500", img: "https://img.icons8.com/color/256/crystal-ball.png", item: "마음의 평화, 허브티 세트", link: "https://coupang.com" },
-            "ISTP": { title: "마이웨이 해결사 (ISTP)", desc: "필요한 말만 하고 할 일만 딱 하는 쿨가이! 툴(도구)을 다루는 데 천부적인 재능이 있습니다.", color: "text-gray-600", img: "https://img.icons8.com/color/256/toolbox.png", item: "손목 보호 필수! 인체공학 버티컬 마우스", link: "https://coupang.com" },
-            "INTP": { title: "게으른 천재 (INTP)", desc: "논리와 분석을 사랑하는 사색가! 반복되는 단순 업무를 가장 싫어하고 비효율을 못 견딥니다.", color: "text-gray-500", img: "https://img.icons8.com/color/256/rubiks-cube.png", item: "최고의 효율, 듀얼 모니터 암", link: "https://coupang.com" },
-            "ISFP": { title: "평화주의자 (ISFP)", desc: "갈등을 싫어하고 물 흐르듯 직장 생활을 하는 타입. 조용하지만 자기만의 예술적 감각이 있습니다.", color: "text-green-500", img: "https://img.icons8.com/color/256/paint-palette.png", item: "나만의 힐링존, 책상용 미니 식물", link: "https://coupang.com" },
-            "INFP": { title: "유리멘탈 몽상가 (INFP)", desc: "속에 수많은 생각과 감정이 휘몰아치는 타입. 상처를 잘 받지만 의미 있는 일에는 누구보다 진심입니다.", color: "text-emerald-400", img: "https://img.icons8.com/color/256/cloud.png", item: "감성 듬뿍, 포근한 낮잠 쿠션", link: "https://coupang.com" }
+            "ESTJ": { title: "호통치는 불도저 (ESTJ)", desc: "체계적이고 규칙을 중시하는 워커홀릭 리더입니다. 꼰대 소리를 들을 수도 있지만 일 하나는 확실하죠!", color: "text-red-500", img: "https://img.icons8.com/color/256/megaphone.png", item: "강력한 피로회복! 고함량 비타민B", link: "https://link.coupang.com/a/ecZ5pm" },
+            "ENTJ": { title: "전략적 야망가 (ENTJ)", desc: "목표 달성을 위해 거침없이 직진하는 리더! 비효율을 극혐하며 승진에 가장 유리한 타입입니다.", color: "text-red-600", img: "https://img.icons8.com/color/256/crown.png", item: "시간 관리의 끝판왕, 최고급 플래너", link: "https://link.coupang.com/a/ecZ6Oq" },
+            "ESFJ": { title: "다정다감 인싸 (ESFJ)", desc: "사내 평판 1위! 동료들을 챙기고 조직 분위기를 띄우는 없어서는 안 될 분위기 메이커입니다.", color: "text-yellow-500", img: "https://img.icons8.com/color/256/conference-call.png", item: "탕비실 인기 스타, 고급 다과 세트", link: "https://link.coupang.com/a/ecZ75A" },
+            "ENFJ": { title: "따뜻한 멘토 (ENFJ)", desc: "타인의 성장을 돕는 것을 좋아하는 이상주의자! 동료들에게 긍정적인 에너지를 뿜어냅니다.", color: "text-yellow-400", img: "https://img.icons8.com/color/256/sun.png", item: "목관리를 위한 휴대용 가습기", link: "https://link.coupang.com/a/ecZ9vC" },
+            "ESTP": { title: "위기 대처 만렙 (ESTP)", desc: "순발력이 뛰어나고 실전에 강한 타짜! 갑작스러운 이슈 상황에서 가장 빛을 발합니다.", color: "text-orange-500", img: "https://img.icons8.com/color/256/flash-on.png", item: "언제든 달릴 준비! 편안한 사무실 슬리퍼", link: "https://link.coupang.com/a/ec0ahK" },
+            "ENTP": { title: "아이디어 뱅크 (ENTP)", desc: "회의 시간의 폭주기관차! 기발한 아이디어는 넘치지만 마무리가 조금 약할 수 있어요.", color: "text-purple-500", img: "https://img.icons8.com/color/256/idea.png", item: "아이디어 번뜩! 무소음 기계식 키보드", link: "https://link.coupang.com/a/ec0a8I" },
+            "ESFP": { title: "자유로운 영혼 (ESFP)", desc: "사무실에 갇혀 있는 걸 가장 힘들어하는 타입! 하지만 텐션이 높아 모두가 좋아합니다.", color: "text-pink-500", img: "https://img.icons8.com/color/256/confetti.png", item: "데스크테리어 완성! 귀여운 피규어 방향제", link: "https://link.coupang.com/a/ec0b09" },
+            "ENFP": { title: "열정 만수르 (ENFP)", desc: "새로운 프로젝트를 사랑하는 스파크형! 관심 있는 일에는 엄청난 열정을 보입니다.", color: "text-green-400", img: "https://img.icons8.com/color/256/rocket.png", item: "지루함 타파! 신기한 책상 장난감", link: "https://link.coupang.com/a/ec0b09" },
+            "ISTJ": { title: "소리 없는 에이스 (ISTJ)", desc: "FM 그 자체! 묵묵하고 정확하게 자신의 일을 완벽히 해내는 회사에서 가장 신뢰받는 타입입니다.", color: "text-blue-600", img: "https://img.icons8.com/color/256/todo-list.png", item: "정리의 달인, 데스크 오거나이저", link: "https://link.coupang.com/a/ec0dx6" },
+            "INTJ": { title: "차가운 전략가 (INTJ)", desc: "남들과 다른 큰 그림을 그리는 고독한 천재! 혼자 일할 때 가장 효율이 높습니다.", color: "text-indigo-600", img: "https://img.icons8.com/color/256/brain.png", item: "완벽한 차단, 노이즈 캔슬링 헤드폰", link: "https://link.coupang.com/a/ec0d9H" },
+            "ISFJ": { title: "헌신적인 천사 (ISFJ)", desc: "뒤에서 묵묵히 팀원들을 서포트하는 숨은 공로자! 거절을 잘 못해서 일이 몰릴 수 있어요.", color: "text-blue-400", img: "https://img.icons8.com/color/256/angel.png", item: "어깨 피로 싹! 미니 마사지기", link: "https://link.coupang.com/a/ec0fu9" },
+            "INFJ": { title: "통찰력 있는 관찰자 (INFJ)", desc: "조용히 사람들을 파악하고 핵심을 꿰뚫어 봅니다. 완벽주의 성향이 있어 속으로 스트레스를 받아요.", color: "text-teal-500", img: "https://img.icons8.com/color/256/crystal-ball.png", item: "마음의 평화, 허브티 세트", link: "https://link.coupang.com/a/ec0f4Y" },
+            "ISTP": { title: "마이웨이 해결사 (ISTP)", desc: "필요한 말만 하고 할 일만 딱 하는 쿨가이! 툴(도구)을 다루는 데 천부적인 재능이 있습니다.", color: "text-gray-600", img: "https://img.icons8.com/color/256/toolbox.png", item: "손목 보호 필수! 인체공학 버티컬 마우스", link: "https://link.coupang.com/a/ec0hbL" },
+            "INTP": { title: "게으른 천재 (INTP)", desc: "논리와 분석을 사랑하는 사색가! 반복되는 단순 업무를 가장 싫어하고 비효율을 못 견딥니다.", color: "text-gray-500", img: "https://img.icons8.com/color/256/rubiks-cube.png", item: "최고의 효율, 듀얼 모니터 암", link: "https://link.coupang.com/a/ec0hP6" },
+            "ISFP": { title: "평화주의자 (ISFP)", desc: "갈등을 싫어하고 물 흐르듯 직장 생활을 하는 타입. 조용하지만 자기만의 예술적 감각이 있습니다.", color: "text-green-500", img: "https://img.icons8.com/color/256/paint-palette.png", item: "나만의 힐링존, 책상용 미니 식물", link: "https://link.coupang.com/a/ec0ir1" },
+            "INFP": { title: "유리멘탈 몽상가 (INFP)", desc: "속에 수많은 생각과 감정이 휘몰아치는 타입. 상처를 잘 받지만 의미 있는 일에는 누구보다 진심입니다.", color: "text-emerald-400", img: "https://img.icons8.com/color/256/cloud.png", item: "감성 듬뿍, 포근한 낮잠 쿠션", link: "https://link.coupang.com/a/ec0iW8" }
         };
 
         // ==========================================
@@ -199,7 +199,7 @@
 
                     <!-- 💰 2. 개발자 후원 (카카오페이 송금 링크 등 활용) -->
                     <!-- ⚠️ window.open 안의 주소를 본인의 카카오페이 송금 링크로 변경하세요! -->
-                    <button onclick="window.open('https://qr.kakaopay.com/본인코드', '_blank')" class="w-full bg-white hover:bg-[#FEE500] border border-gray-200 hover:border-[#FEE500] text-gray-600 hover:text-gray-900 font-bold py-2.5 rounded-xl transition duration-200 mb-6 flex items-center justify-center gap-2 text-sm shadow-sm">
+                    <button onclick="window.open('https://qr.kakaopay.com/FGWZY30d3', '_blank')" class="w-full bg-white hover:bg-[#FEE500] border border-gray-200 hover:border-[#FEE500] text-gray-600 hover:text-gray-900 font-bold py-2.5 rounded-xl transition duration-200 mb-6 flex items-center justify-center gap-2 text-sm shadow-sm">
                         ☕ 재밌게 즐기셨다면? 카카오페이로 커피 한 잔 후원하기
                     </button>
 
